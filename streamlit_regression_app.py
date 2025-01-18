@@ -7,7 +7,7 @@ import pickle
 
 # ## Load the trainer model, scaler pickle, label encoder, and one hot encoder
 
-model = tf.keras.models.load_model('model.h5')
+model = tf.keras.models.load_model('regression_model.h5')
 
 with open('label_encoder_gender.pkl', 'rb') as f:
     le_gender = pickle.load(f)
@@ -27,11 +27,11 @@ gender = st.selectbox('Gender', le_gender.classes_)
 age = st.slider('Age', 18, 100)
 balance = st.number_input('Balance')
 credit_score = st.slider('Credit Score', 300, 850)
-estimated_salary = st.number_input('Estimated Salary')
 tenure = st.slider('Tenure', 0, 10)
 num_of_products = st.slider('Number of Products', 1, 4)
 has_cr_card = st.selectbox('Has Credit Card', [0, 1])
 is_active_member = st.selectbox('Is Active Member', [0, 1])
+exited = st.selectbox('Exited', [0, 1])
 
 if st.button('Predict', key='predict_button'):
 
@@ -44,7 +44,7 @@ if st.button('Predict', key='predict_button'):
         'NumOfProducts': [num_of_products],
         'HasCrCard': [has_cr_card],
         'IsActiveMember': [is_active_member], 
-        'EstimatedSalary': [estimated_salary]
+        'Exited': [exited]
     })
 
     input_data_geography = oh_geography.transform([[geography]])
@@ -58,9 +58,4 @@ if st.button('Predict', key='predict_button'):
     prediction = model.predict(input_data_scaled)
     prediction_probability = prediction[0][0]
 
-    st.write(f'Prediction probability of customer churn: {prediction_probability:.2f}')
-
-    if prediction_probability > 0.5:
-        st.write('Customer is likely to churn')
-    else:
-        st.write('Customer is unlikely to churn')
+    st.write(f'Predicted salary of customer: {prediction_probability:.2f}')
