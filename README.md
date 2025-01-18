@@ -1,1 +1,1 @@
-# ann-classification-streamlit-app
+# This repository contains the code for the Streamlit app that demonstrates the implementation of an Artificial Neural Network (ANN) for classification using the `scikit-learn`, `TensorFlow`, and `Keras` libraries. The app allows users to use a GUI to input the data and obtain the classification results from the ANN model. There are also logs and metrics displayed in the `experiments.ipynb` using the `TensorBoard` library. 
